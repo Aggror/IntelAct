@@ -130,9 +130,9 @@
       <DependentUpon>GoogleAccountControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="KeyboardHook.cs" />
-    <Compile Include="Stuff\ActionStuff.cs" />
-    <Compile Include="Stuff\IntelAct.cs" />
-    <Compile Include="Stuff\Redirect.cs" />
+    <Compile Include="IntelAct\ActionStuff.cs" />
+    <Compile Include="IntelAct\IntelActService.cs" />
+    <Compile Include="IntelAct\Redirect.cs" />
     <Compile Include="UserManager.cs" />
     <Compile Include="Utils.cs" />
     <Page Include="GoogleAccountControl.xaml">

@@ -1,16 +1,17 @@
-﻿using hackaton;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace GoogleAssistantWindows.Stuff
+namespace GoogleAssistantWindows.IntelAct
 {
-    public static class IntelAct
+    public static class IntelActService
     {
 
         //1 Clean up the input 
         public static List<string> VeryNoice(string input)
         {
+            var inputWords = input.Split(new Char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
             List<string> badWords = new List<string>() {
                 "de",
                 "het",
@@ -34,13 +35,14 @@ namespace GoogleAssistantWindows.Stuff
                 "us"
             };
 
-            foreach (var badWord in badWords)
+            var cleanWords = new List<string>();
+            foreach (var inputWord in inputWords)
             {
-                input = input.ToLower().Replace(badWord.ToLower(), "");
+                if (!badWords.Contains(inputWord.ToLower()))
+                {
+                    cleanWords.Add(inputWord.ToLower());
+                }
             }
-
-            input.Trim();
-            var cleanWords = input.Split(new Char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
             return cleanWords.ToList();
         }
@@ -53,6 +55,9 @@ namespace GoogleAssistantWindows.Stuff
             actionKeyWords.Add("zoek", "show");
             actionKeyWords.Add("search", "show");
             actionKeyWords.Add("toon", "show");
+            actionKeyWords.Add("tonen", "show");
+
+            actionKeyWords.Add("wijzig", "edit");
             actionKeyWords.Add("bewerk", "edit");
             actionKeyWords.Add("edit", "edit");
 

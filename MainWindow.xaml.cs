@@ -1,4 +1,4 @@
-﻿using GoogleAssistantWindows.Stuff;
+﻿using GoogleAssistantWindows.IntelAct;
 using System;
 using System.Windows;
 using System.Windows.Forms;
@@ -130,12 +130,12 @@ namespace GoogleAssistantWindows
 
 
                     //1 filter alle waardeloze woorden
-                    var cleanWords = IntelAct.VeryNoice(translatedText);
+                    var cleanWords = IntelActService.VeryNoice(translatedText);
                     IA_keywords.Content = String.Join(", ", cleanWords.ToArray());
                     Console.WriteLine("Cleanwords:  " + String.Join(", ", cleanWords.ToArray()));
 
                     //2 Determine the keywords
-                    var action = IntelAct.DetermineKeyWords(cleanWords);
+                    var action = IntelActService.DetermineKeyWords(cleanWords);
                     if (action == null)
                     {
                         throw new Exception("no matching action");
@@ -147,7 +147,7 @@ namespace GoogleAssistantWindows
                     Console.WriteLine(actionValues);
 
                     //3 Match ActionStuff with an actual Redirect
-                    var redirect = IntelAct.MatchActionStuffToRedirect(action);
+                    var redirect = IntelActService.MatchActionStuffToRedirect(action);
                     if (redirect == null)
                     {
                         throw new Exception("no matching redirect");
@@ -156,9 +156,6 @@ namespace GoogleAssistantWindows
                     Console.WriteLine("Redirect Url:  " + redirect.Url);
 
                     Console.ReadLine();
-
-
-
                 }
 
                 System.Diagnostics.Debug.WriteLine(output);

@@ -1,4 +1,4 @@
-﻿namespace hackaton
+﻿namespace GoogleAssistantWindows.IntelAct
 {
     public class RedirectCrap
     {
