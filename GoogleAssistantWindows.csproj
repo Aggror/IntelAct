@@ -186,7 +186,7 @@
     <Content Include="Resources\positive.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Secrets\client_id.json">
+    <Content Include="Secrets\client_id_michiel.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="packages.config" />
@@ -194,6 +194,9 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Content Include="Secrets\client_id.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Secrets\MISSING.md" />
   </ItemGroup>
   <ItemGroup>
