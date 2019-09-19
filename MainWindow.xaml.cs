@@ -107,6 +107,11 @@ namespace GoogleAssistantWindows
             IntelActPopup.Visibility = Visibility.Visible;
         }
 
+        private void CloseIntelAct_OnClick(object sender, RoutedEventArgs e)
+        {
+            IntelActPopup.Visibility = Visibility.Hidden;
+        }
+
         private void ButtonRecord_OnClick(object sender, RoutedEventArgs e)
         {
             StartListening();

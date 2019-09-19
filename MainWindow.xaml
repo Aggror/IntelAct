@@ -5,40 +5,54 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GoogleAssistantWindows"
         mc:Ignorable="d"
-        Title="IntelAct" Height="664.166" Width="996.667" Loaded="MainWindow_OnLoaded" ResizeMode="CanMinimize">
+        Title="IntelAct" Height="832.166" Width="1325.167" Loaded="MainWindow_OnLoaded" ResizeMode="CanMinimize">
     <Grid Margin="0,0,29,-304" RenderTransformOrigin="0.501,0.548">
 
         <Image Source="Resources/IntactMic.PNG" Margin="0,0,-23,419" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
 
         <Button x:Name="OpenIntelAct" Content="" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" BorderThickness="0" 
-                Padding="10" Margin="865,4,68,908" HorizontalAlignment="Center" VerticalAlignment="Center" Width="29" 
+                Padding="10" Margin="1157,10,104,1070" HorizontalAlignment="Center" VerticalAlignment="Center" Width="29" 
                 Click="OpenIntelAct_OnClick" IsEnabled="True" Height="27"/>
 
-        <Grid x:Name="IntelActPopup" Background="Khaki" HorizontalAlignment="Stretch" Margin="151,49,75,419">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="717*"/>
-                <ColumnDefinition Width="19*"/>
-            </Grid.ColumnDefinitions>
-            <Image Source="Resources/IntelAct.PNG" Margin="7,-5,548.333,420" RenderTransformOrigin="0.5,0.5"/>
-            <local:GoogleAccountControl Margin="485,0,10,420" Grid.ColumnSpan="2" />
+        <Canvas x:Name="IntelActPopup" >
+            <Rectangle Opacity="0.5" Height="811" Width="1522">
+                <Rectangle.Fill>
+                    <SolidColorBrush Color="black" />
+                </Rectangle.Fill>
+            </Rectangle>
+            <Grid Background="WhiteSmoke" HorizontalAlignment="Stretch" Canvas.Left="210" Canvas.Top="58" Width="994" Height="590">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="717*"/>
+                    <ColumnDefinition Width="19*"/>
+                </Grid.ColumnDefinitions>
 
-            <Button x:Name="ButtonRecord" Content="Record" BorderThickness="0" 
-                Padding="10" Margin="10,51,638.333,385" HorizontalAlignment="Center" VerticalAlignment="Center" Width="69" 
-                Click="ButtonRecord_OnClick" IsEnabled="True" IsDefault="True" Height="35"/>
+                <Image Source="Resources/IntelAct.PNG" Margin="-209,10,593,549" RenderTransformOrigin="0.5,0.5"/>
+                <local:GoogleAccountControl Margin="441,0,34,481" />
+                <Button x:Name="CloseIntelAct" Content="X" BorderThickness="0" 
+                    Padding="0" Margin="956,10,10,553" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" 
+                    Click="CloseIntelAct_OnClick" IsEnabled="True" Height="27" Grid.ColumnSpan="2"/>
 
-            <Label x:Name="lblTranslatedText" Content="" HorizontalAlignment="Left" Margin="84,51,0,0" VerticalAlignment="Top" Width="642" FontSize="20" FontWeight="Bold" Foreground="#FF279E21" Height="36" Background="#FFA3EE04" Grid.ColumnSpan="2"/>
-            <ListBox Background="SkyBlue" x:Name="ListBoxOutput" Margin="8,344,10,2" Grid.ColumnSpan="2"  />
-            <Label Content="Keywords" Margin="10,111,609.333,0" VerticalAlignment="Top"/>
-            <Label Content="Action" Margin="10,137,609.333,0" VerticalAlignment="Top"/>
-            <Label Content="Entity" Margin="10,163,609.333,0" VerticalAlignment="Top"/>
-            <Label Content="Search" Margin="10,189,609.333,0" VerticalAlignment="Top"/>
-            <Label Content="Url" Margin="10,215,609.333,0" VerticalAlignment="Top"/>
+                <Button x:Name="ButtonRecord" Content="Record" BorderThickness="0" 
+                        Padding="10" Margin="10,114,878,440" HorizontalAlignment="Center" VerticalAlignment="Center" Width="80" 
+                        Click="ButtonRecord_OnClick" IsEnabled="True" IsDefault="True" Height="36" RenderTransformOrigin="0.5,0.5"/>
+                <Label x:Name="lblTranslatedText" Content="" HorizontalAlignment="Left" Margin="104,114,0,0" VerticalAlignment="Top" Width="880" FontSize="20" FontWeight="Bold" Foreground="#FF279E21" Height="36" Background="#FFA3EE04" Grid.ColumnSpan="2"/>
 
-            <Label x:Name="IA_keywords" Content="[Keywords]" Margin="108,111,305.333,0" VerticalAlignment="Top"/>
-            <Label x:Name="IA_action" Content="[Action]" Margin="108,137,305.333,0" VerticalAlignment="Top"/>
-            <Label x:Name="IA_entity" Content="[Entity]" Margin="108,163,305.333,0" VerticalAlignment="Top" />
-            <Label x:Name="IA_search" Content="[Search]" Margin="108,189,305.333,0" VerticalAlignment="Top"/>
-            <Label x:Name="IA_url" Content="[Url]" Margin="108,215,305.333,0" VerticalAlignment="Top"/>
-        </Grid>
+                <Canvas Margin="24,318,30,24" >
+                    <Label Content="Keywords" Margin="10,111,609.333,0" VerticalAlignment="Top"/>
+                    <Label Content="Action" Margin="10,137,609.333,0" VerticalAlignment="Top"/>
+                    <Label Content="Entity" Margin="10,163,609.333,0" VerticalAlignment="Top"/>
+                    <Label Content="Search" Margin="10,189,609.333,0" VerticalAlignment="Top"/>
+                    <Label Content="Url" Margin="10,215,609.333,0" VerticalAlignment="Top"/>
+
+                    <Label x:Name="IA_keywords" Content="[Keywords]" Margin="108,111,305.333,0" VerticalAlignment="Top"/>
+                    <Label x:Name="IA_action" Content="[Action]" Margin="108,137,305.333,0" VerticalAlignment="Top"/>
+                    <Label x:Name="IA_entity" Content="[Entity]" Margin="108,163,305.333,0" VerticalAlignment="Top" />
+                    <Label x:Name="IA_search" Content="[Search]" Margin="108,189,305.333,0" VerticalAlignment="Top"/>
+                    <Label x:Name="IA_url" Content="[Url]" Margin="108,215,305.333,0" VerticalAlignment="Top"/>
+                </Canvas >
+                <!--CONSOLE is hidden-->
+                <ListBox Visibility="Hidden" Background="SkyBlue" x:Name="ListBoxOutput" Margin="8,367,10,203" Grid.ColumnSpan="2"  />
+            </Grid>
+        </Canvas>
     </Grid>
 </Window>
