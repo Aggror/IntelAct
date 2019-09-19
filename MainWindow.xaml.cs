@@ -56,7 +56,9 @@ namespace GoogleAssistantWindows
             _assistant.OnAssistantStateChanged += OnAssistantStateChanged;
 
             _userManager = UserManager.Instance;
-            _userManager.OnUserUpdate += OnUserUpdate;            
+            _userManager.OnUserUpdate += OnUserUpdate;
+
+            IntelActPopup.Visibility = Visibility.Hidden;
         }        
 
         protected override void OnStateChanged(EventArgs e)
@@ -99,7 +101,12 @@ namespace GoogleAssistantWindows
             if (Utils.HasTokenFile()) 
                 _userManager.GetOrRefreshCredential();     // we don't need to wait for this UserManager will throw an event on loaded.       
         }
-       
+
+        private void OpenIntelAct_OnClick(object sender, RoutedEventArgs e)
+        {
+            IntelActPopup.Visibility = Visibility.Visible;
+        }
+
         private void ButtonRecord_OnClick(object sender, RoutedEventArgs e)
         {
             StartListening();
