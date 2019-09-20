@@ -35,9 +35,10 @@
                 <Button x:Name="ButtonRecord" Content="Record" BorderThickness="0" 
                         Padding="10" Margin="10,114,878,440" HorizontalAlignment="Center" VerticalAlignment="Center" Width="80" 
                         Click="ButtonRecord_OnClick" IsEnabled="True" IsDefault="True" Height="36" RenderTransformOrigin="0.5,0.5"/>
-                <Label x:Name="lblTranslatedText" Content="" HorizontalAlignment="Left" Margin="104,114,0,0" VerticalAlignment="Top" Width="880" FontSize="20" FontWeight="Bold" Foreground="#FF279E21" Height="36" Background="#FFA3EE04" Grid.ColumnSpan="2"/>
+                <Label x:Name="lblTranslatedText" Content="" HorizontalAlignment="Left" Margin="124,114,0,0" VerticalAlignment="Top" Width="860" FontSize="20" FontWeight="Bold" Foreground="#FF279E21" Height="36" Background="#FFA3EE04" Grid.ColumnSpan="2"/>
+                <RadioButton x:Name="RecordingIcon" Margin="102,126,849,449" Background="Red" />
 
-                <Canvas Margin="24,318,30,24" >
+                <Canvas x:Name="PassedResults" Margin="24,318,30,24" >
                     <Label Content="Keywords" Margin="10,111,609.333,0" VerticalAlignment="Top"/>
                     <Label Content="Action" Margin="10,137,609.333,0" VerticalAlignment="Top"/>
                     <Label Content="Entity" Margin="10,163,609.333,0" VerticalAlignment="Top"/>

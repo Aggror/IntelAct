@@ -28,7 +28,7 @@ namespace GoogleAssistantWindows
         {
             InitializeComponent();
 
-            _audioOut = new AudioOut();          
+            _audioOut = new AudioOut();
 
             _hook = new KeyboardHook();
             _hook.KeyDown += OnHookKeyDown;
@@ -36,13 +36,13 @@ namespace GoogleAssistantWindows
             {
                 // Global keyboard hook for Ctrl+Alt+G to start listening.
                 if (e.Control && e.Alt && e.Key == Keys.G)
-                    StartListening();                
+                    StartListening();
             }
 
             // When minimized it will hide in the tray. but the global keyboard hook should still work
             _notifyIcon = new NotifyIcon();
             _notifyIcon.Icon = new System.Drawing.Icon("Mic.ico");
-            _notifyIcon.Text = Title;            
+            _notifyIcon.Text = Title;
             _notifyIcon.DoubleClick +=
                 delegate
                 {
@@ -59,7 +59,8 @@ namespace GoogleAssistantWindows
             _userManager.OnUserUpdate += OnUserUpdate;
 
             IntelActPopup.Visibility = Visibility.Hidden;
-        }        
+            PassedResults.Visibility = Visibility.Hidden;
+        }
 
         protected override void OnStateChanged(EventArgs e)
         {
@@ -70,7 +71,7 @@ namespace GoogleAssistantWindows
             }
             base.OnStateChanged(e);
         }
-        
+
         private void OnAssistantStateChanged(AssistantState state)
         {
             _assistantState = state;
@@ -81,8 +82,8 @@ namespace GoogleAssistantWindows
         {
             if (ButtonRecord.Dispatcher.CheckAccess())
                 ButtonRecord.Content = state == AssistantState.Inactive ? "Press" : state.ToString();
-            else
-                ButtonRecord.Dispatcher.BeginInvoke(new Action(()=>UpdateButtonText(state)));
+            //else
+                //ButtonRecord.Dispatcher.BeginInvoke(new Action(() => UpdateButtonText(state)));
         }
 
         private void OnUserUpdate(UserManager.GoogleUserData userData)
@@ -98,31 +99,48 @@ namespace GoogleAssistantWindows
 
         private void MainWindow_OnLoaded(object sender, RoutedEventArgs e)
         {
-            if (Utils.HasTokenFile()) 
+            if (Utils.HasTokenFile())
                 _userManager.GetOrRefreshCredential();     // we don't need to wait for this UserManager will throw an event on loaded.       
         }
 
         private void OpenIntelAct_OnClick(object sender, RoutedEventArgs e)
         {
-            IntelActPopup.Visibility = Visibility.Visible;
+           IntelActPopup.Visibility = Visibility.Visible;
+           
+           StartListening();
+            
         }
 
         private void CloseIntelAct_OnClick(object sender, RoutedEventArgs e)
         {
             IntelActPopup.Visibility = Visibility.Hidden;
+            StopListening();
         }
 
         private void ButtonRecord_OnClick(object sender, RoutedEventArgs e)
         {
+            PassedResults.Visibility = Visibility.Hidden;
+            RecordingIcon.Visibility = Visibility.Visible;
             StartListening();
         }
 
         private void StartListening()
         {
-            if (_assistant.IsInitialised() && _assistantState == AssistantState.Inactive)
+            if (_assistant.IsInitialised())
             {
-                _assistant.NewConversation();          
-                _audioOut.PlayNotification();
+                lblTranslatedText.Content = "...";
+                _assistant.NewConversation();
+                //_audioOut.PlayNotification();
+            }
+        }
+
+        private void StopListening()
+        {
+            if (_assistant.IsInitialised() && _assistantState != AssistantState.Inactive)
+            {
+                RecordingIcon.Visibility = Visibility.Hidden;
+                _assistant.Shutdown();
+                UpdateButtonText(AssistantState.Inactive);
             }
         }
 
@@ -139,7 +157,8 @@ namespace GoogleAssistantWindows
                 if (translatedText != String.Empty)
                 {
                     lblTranslatedText.Content = translatedText;
-
+                    RecordingIcon.Visibility = Visibility.Hidden;
+                    PassedResults.Visibility = Visibility.Visible;
 
                     //1 filter alle waardeloze woorden
                     var cleanWords = IntelActService.VeryNoice(translatedText);
@@ -152,11 +171,9 @@ namespace GoogleAssistantWindows
                     {
                         throw new Exception("no matching action");
                     }
-                    var actionValues = "Name: " + action.Name + ". Entity: " + action.Entity + ". Value: " + action.Value;
                     IA_action.Content = action.Name;
                     IA_entity.Content = action.Entity;
                     IA_search.Content = action.Value;
-                    Console.WriteLine(actionValues);
 
                     //3 Match ActionStuff with an actual Redirect
                     var redirect = IntelActService.MatchActionStuffToRedirect(action);
@@ -177,7 +194,7 @@ namespace GoogleAssistantWindows
                     ListBoxOutput.Items.RemoveAt(0);
 
                 ListBoxOutput.Items.Add(output);
-                ListBoxOutput.ScrollIntoView(ListBoxOutput.Items[ListBoxOutput.Items.Count-1]);
+                ListBoxOutput.ScrollIntoView(ListBoxOutput.Items[ListBoxOutput.Items.Count - 1]);
 
                 if (output.StartsWith("Error") && Height == NormalHeight)
                     Height = DebugHeight;
@@ -186,6 +203,6 @@ namespace GoogleAssistantWindows
                 ListBoxOutput.Dispatcher.BeginInvoke(new Action(() => Output(output)));
         }
 
-  
+
     }
 }

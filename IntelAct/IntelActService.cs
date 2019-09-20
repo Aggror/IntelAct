@@ -12,7 +12,12 @@ namespace GoogleAssistantWindows.IntelAct
         {
             var inputWords = input.Split(new Char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
-            List<string> badWords = new List<string>() {
+            List<string> filterWords = new List<string>() {
+                "hi",
+                "hallo",
+                "hey",
+                "hello",
+                "google",
                 "de",
                 "het",
                 "een",
@@ -26,19 +31,21 @@ namespace GoogleAssistantWindows.IntelAct
                 "wij",
                 "ons",
                 "the",
-                "a ",
+                "from",
+                "a",
                 "an",
                 "it",
                 "you",
                 "our",
                 "we",
-                "us"
+                "us",
+                "of"
             };
 
             var cleanWords = new List<string>();
             foreach (var inputWord in inputWords)
             {
-                if (!badWords.Contains(inputWord.ToLower()))
+                if (!filterWords.Contains(inputWord.ToLower()))
                 {
                     cleanWords.Add(inputWord.ToLower());
                 }
@@ -61,13 +68,6 @@ namespace GoogleAssistantWindows.IntelAct
             actionKeyWords.Add("bewerk", "edit");
             actionKeyWords.Add("edit", "edit");
 
-            var entities = new List<string>() {
-                "profiel",
-                "profile",
-                "factuur",
-                "invoice",
-            };
-
             var action = new ActionStuff();
             foreach (var actionKeyWord in actionKeyWords)
             {
@@ -79,17 +79,29 @@ namespace GoogleAssistantWindows.IntelAct
                 }
             }
 
-            foreach (var entity in entities)
+            var entityKeyWords = new Dictionary<string, string>();
+            entityKeyWords.Add("profiel", "profile");
+            entityKeyWords.Add("profielen", "profile");
+            entityKeyWords.Add("profile", "profile");
+            entityKeyWords.Add("profiles", "profile");
+
+            entityKeyWords.Add("factuur", "invoice");
+            entityKeyWords.Add("facuren", "invoice");
+            entityKeyWords.Add("invoice", "invoice");
+            entityKeyWords.Add("invoices", "invoice");
+
+            foreach (var entityKeyWord in entityKeyWords)
             {
-                if (cleanedWords.Contains(entity))
+                if (cleanedWords.Contains(entityKeyWord.Key))
                 {
-                    action.Entity = entity;
-                    cleanedWords.Remove(entity);
+                    action.Entity = entityKeyWord.Value;
+                    cleanedWords.Remove(entityKeyWord.Key);
                     break;
                 }
-
             }
-            action.Value = cleanedWords.FirstOrDefault();
+
+
+            action.Value = String.Join(",", cleanedWords.ToArray());
 
             return action;
         }
@@ -115,7 +127,6 @@ namespace GoogleAssistantWindows.IntelAct
                     }
                     else
                     {
-                        //wel parameter
                         if (redirect.Url.Contains("?"))
                         {
                             redirect.action = action;
@@ -133,27 +144,13 @@ namespace GoogleAssistantWindows.IntelAct
         {
             return new List<RedirectCrap>()
             {
-                new RedirectCrap()
-                {
-                    Name = "show",
-                    Entity = "profiel",
-                    Url = "/profiles/",
-                    Table = "dbo.profile"
-                },
-                new RedirectCrap()
-                {
-                    Name = "show",
-                    Entity = "profiel",
-                    Url = "/profiles/show?search=",
-                    Table = "dbo.profile"
-                },
-                new RedirectCrap()
-                {
-                    Name = "edit",
-                    Entity = "profiel",
-                    Url = "/profiles/edit?search=",
-                    Table = "dbo.profile"
-                }
+                new RedirectCrap(){Name = "show", Entity = "profile", Url = "/profiles/", Table = "dbo.profile"},
+                new RedirectCrap(){Name = "show", Entity = "profile", Url = "/profiles/show?search=", Table = "dbo.profile"},
+                new RedirectCrap(){Name = "edit", Entity = "profile", Url = "/profiles/edit?search=", Table = "dbo.profile"},
+
+                new RedirectCrap(){Name = "show", Entity = "invoice", Url = "/invoice/", Table = "dbo.profile"},
+                new RedirectCrap(){Name = "show", Entity = "invoice", Url = "/invoice/show?search=", Table = "dbo.profile"},
+                new RedirectCrap(){Name = "edit", Entity = "invoice", Url = "/invoice/edit?search=", Table = "dbo.profile"},
             };
         }
     }

@@ -121,7 +121,8 @@ namespace GoogleAssistantWindows
                 _waveIn.Dispose();
                 _waveIn = null;
 
-                OnAssistantStateChanged?.Invoke(AssistantState.Processing);
+                OnAssistantStateChanged?.Invoke(AssistantState.Inactive);
+                
 
                 OnDebug?.Invoke("Send Request Complete");
                 _requestStreamAvailable = false;

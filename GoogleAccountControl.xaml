@@ -4,11 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:GoogleAssistantWindows"
-             mc:Ignorable="d" 
-             d:DesignHeight="60" d:DesignWidth="200">
+             mc:Ignorable="d" d:DesignWidth="200" Height="50">
     <Grid>
         <Image x:Name="ImageGoogleSignIn" Source="Resources/Google_SignIn.png" Grid.ColumnSpan="2" Width="140" HorizontalAlignment="Left" Margin="10" PreviewMouseLeftButtonUp="ImageGoogleSignIn_PreviewMouseLeftButtonUp" />
-        <Grid x:Name="GridSignedIn" Visibility="Hidden">
+        <Grid x:Name="GridSignedIn" Visibility="Visible">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="55"/>
                 <ColumnDefinition Width="*"/>
@@ -19,8 +18,8 @@
             </Border>
 
             <StackPanel Grid.Column="1">
-                <TextBlock x:Name="TextBlockName" HorizontalAlignment="Stretch" Text="Name" Margin="10,8,10,4" FontWeight="DemiBold" />
-                <TextBlock x:Name="TextBlockSignOut" HorizontalAlignment="Stretch" Text="Sign Out" Margin="10,4" FontWeight="ExtraLight" PreviewMouseLeftButtonUp="TextBlockSignOut_OnPreviewMouseLeftButtonUp"  />
+                <TextBlock x:Name="TextBlockName"  Text="Name" Margin="10,8,10,4" FontWeight="DemiBold" />
+                <TextBlock x:Name="TextBlockSignOut" Text="Sign Out" Margin="10,4" FontWeight="ExtraLight" PreviewMouseLeftButtonUp="TextBlockSignOut_OnPreviewMouseLeftButtonUp"  />
             </StackPanel>
         </Grid>
     </Grid>
