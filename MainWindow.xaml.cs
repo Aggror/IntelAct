@@ -128,6 +128,12 @@ namespace GoogleAssistantWindows
         {
             if (_assistant.IsInitialised())
             {
+                IA_action.Content = "";
+                IA_entity.Content = "";
+                IA_search.Content = "";
+                IA_keywords.Content = "";
+                //IA_url.Content = "";
+
                 lblTranslatedText.Content = "...";
                 _assistant.NewConversation();
                 //_audioOut.PlayNotification();
@@ -163,7 +169,6 @@ namespace GoogleAssistantWindows
                     //1 filter alle waardeloze woorden
                     var cleanWords = IntelActService.VeryNoice(translatedText);
                     IA_keywords.Content = String.Join(", ", cleanWords.ToArray());
-                    Console.WriteLine("Cleanwords:  " + String.Join(", ", cleanWords.ToArray()));
 
                     //2 Determine the keywords
                     var action = IntelActService.DetermineKeyWords(cleanWords);
@@ -182,9 +187,6 @@ namespace GoogleAssistantWindows
                         throw new Exception("no matching redirect");
                     }
                     IA_url.Content = redirect.Url;
-                    Console.WriteLine("Redirect Url:  " + redirect.Url);
-
-                    Console.ReadLine();
                 }
 
                 System.Diagnostics.Debug.WriteLine(output);

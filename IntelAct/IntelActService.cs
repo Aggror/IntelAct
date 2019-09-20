@@ -32,6 +32,8 @@ namespace GoogleAssistantWindows.IntelAct
                 "ons",
                 "the",
                 "from",
+                "with",
+                "number",
                 "a",
                 "an",
                 "it",

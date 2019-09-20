@@ -26,30 +26,30 @@
                     <ColumnDefinition Width="19*"/>
                 </Grid.ColumnDefinitions>
 
-                <Image Source="Resources/IntelAct.PNG" Margin="-209,10,593,549" RenderTransformOrigin="0.5,0.5"/>
-                <local:GoogleAccountControl Margin="441,0,34,481" />
+                <Image Source="Resources/IntelAct.PNG" Margin="-209,14,593,545" RenderTransformOrigin="0.5,0.5"/>
+                <local:GoogleAccountControl Margin="169,0,306,540" />
                 <Button x:Name="CloseIntelAct" Content="X" BorderThickness="0" 
                     Padding="0" Margin="956,10,10,553" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" 
                     Click="CloseIntelAct_OnClick" IsEnabled="True" Height="27" Grid.ColumnSpan="2"/>
 
                 <Button x:Name="ButtonRecord" Content="Record" BorderThickness="0" 
-                        Padding="10" Margin="10,114,878,440" HorizontalAlignment="Center" VerticalAlignment="Center" Width="80" 
+                        Padding="10" Margin="10,65,850,489" HorizontalAlignment="Center" VerticalAlignment="Center" Width="108" 
                         Click="ButtonRecord_OnClick" IsEnabled="True" IsDefault="True" Height="36" RenderTransformOrigin="0.5,0.5"/>
-                <Label x:Name="lblTranslatedText" Content="" HorizontalAlignment="Left" Margin="124,114,0,0" VerticalAlignment="Top" Width="860" FontSize="20" FontWeight="Bold" Foreground="#FF279E21" Height="36" Background="#FFA3EE04" Grid.ColumnSpan="2"/>
-                <RadioButton x:Name="RecordingIcon" Margin="102,126,849,449" Background="Red" />
+                <Label x:Name="lblTranslatedText" Content="" HorizontalAlignment="Left" Margin="159,65,0,0" VerticalAlignment="Top" Width="825" FontSize="20" FontWeight="Bold" Foreground="#FF279E21" Height="36" Background="#FFA3EE04" Grid.ColumnSpan="2"/>
+                <RadioButton x:Name="RecordingIcon" Margin="137,77,814,498" Background="Red" />
 
-                <Canvas x:Name="PassedResults" Margin="24,318,30,24" >
-                    <Label Content="Keywords" Margin="10,111,609.333,0" VerticalAlignment="Top"/>
-                    <Label Content="Action" Margin="10,137,609.333,0" VerticalAlignment="Top"/>
-                    <Label Content="Entity" Margin="10,163,609.333,0" VerticalAlignment="Top"/>
-                    <Label Content="Search" Margin="10,189,609.333,0" VerticalAlignment="Top"/>
-                    <Label Content="Url" Margin="10,215,609.333,0" VerticalAlignment="Top"/>
+                <Canvas x:Name="PassedResults" Margin="10,113,44,328" >
+                    <Label Content="Keywords" VerticalAlignment="Top" FontSize="16" Canvas.Left="7" Canvas.Top="11"/>
+                    <Label Content="Action" VerticalAlignment="Top" FontSize="16" Canvas.Left="7" Canvas.Top="37"/>
+                    <Label Content="Entity" VerticalAlignment="Top" FontSize="16" Canvas.Left="7" Canvas.Top="63"/>
+                    <Label Content="Search" VerticalAlignment="Top" FontSize="16" Canvas.Left="7" Canvas.Top="89"/>
+                    <Label Content="Url" VerticalAlignment="Top" FontSize="16" Canvas.Left="7" Canvas.Top="115"/>
 
-                    <Label x:Name="IA_keywords" Content="[Keywords]" Margin="108,111,305.333,0" VerticalAlignment="Top"/>
-                    <Label x:Name="IA_action" Content="[Action]" Margin="108,137,305.333,0" VerticalAlignment="Top"/>
-                    <Label x:Name="IA_entity" Content="[Entity]" Margin="108,163,305.333,0" VerticalAlignment="Top" />
-                    <Label x:Name="IA_search" Content="[Search]" Margin="108,189,305.333,0" VerticalAlignment="Top"/>
-                    <Label x:Name="IA_url" Content="[Url]" Margin="108,215,305.333,0" VerticalAlignment="Top"/>
+                    <Label x:Name="IA_keywords" Content="[Keywords]" VerticalAlignment="Top" FontSize="16" Canvas.Left="105" Canvas.Top="11"/>
+                    <Label x:Name="IA_action" Content="[Action]" VerticalAlignment="Top" FontSize="16" Canvas.Left="105" Canvas.Top="37"/>
+                    <Label x:Name="IA_entity" Content="[Entity]" VerticalAlignment="Top" FontSize="16" Canvas.Left="105" Canvas.Top="63" />
+                    <Label x:Name="IA_search" Content="[Search]" VerticalAlignment="Top" FontSize="16" Canvas.Left="105" Canvas.Top="89"/>
+                    <Label x:Name="IA_url" Content="[Url]" VerticalAlignment="Top" FontSize="16" Canvas.Left="105" Canvas.Top="115"/>
                 </Canvas >
                 <!--CONSOLE is hidden-->
                 <ListBox Visibility="Hidden" Background="SkyBlue" x:Name="ListBoxOutput" Margin="8,367,10,203" Grid.ColumnSpan="2"  />
